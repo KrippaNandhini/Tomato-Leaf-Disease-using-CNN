@@ -8,7 +8,6 @@ import numpy as np
 # Load the model
 model = load_model('cnn_model.h5')
 model.load_weights('cnn_model_weights.weights.h5')
-loaded_model = model_from_json(loaded_model_json)
 
 # Function to preprocess the image
 def preprocess_image(image):
