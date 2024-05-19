@@ -11,7 +11,7 @@ model.load_weights('cnn_model_weights.weights.h5')
 
 # Function to preprocess the image
 def preprocess_image(image):
-    img = image.resize((224, 224))  # Resize image to match Xception input size
+    img = image.resize((224, 224)) 
     img_array = np.array(img)
     img_array = img_array / 255.0  # Normalize pixel values between 0 and 1
     img_array = np.expand_dims(img_array, axis=0)  # Add batch dimension
