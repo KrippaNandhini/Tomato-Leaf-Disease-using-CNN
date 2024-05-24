@@ -60,6 +60,4 @@ if uploaded_file is not None:
         class_dict = {'Tomato_Bacterial_spot': 0, 'Tomato_Early_blight': 1, 'Tomato_Late_blight': 2, 'Tomato_Leaf_Mold': 3, 'Tomato_Septoria_leaf_spot': 4, 'Tomato_Spider_mites': 5, 'Tomato_Target_Spot': 6, 'Tomato_Yellow_Leaf_Curl_Virus': 7, 'Tomato_mosaic_virus': 8, 'Tomato_healthy': 9}
         predicted_class_index = np.argmax(prediction)
         predicted_class_name = list(class_dict.keys())[predicted_class_index]
-st.write(f"Predicted Class: {predicted_class_name}")
-
-        st.write(f"Predicted Class: {class_name}")
+        st.write(f"Predicted Class: {predicted_class_name}")
