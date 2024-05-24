@@ -1,9 +1,6 @@
 
 import streamlit as st
 import tensorflow as tf
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Conv2D, MaxPool2D, Flatten, Dense,BatchNormalization, Dropout
-from keras.initializers import RandomNormal
 from tensorflow.keras.models import load_model
 from PIL import Image
 import numpy as np
@@ -11,12 +8,11 @@ import numpy as np
 # Load the model
 model = load_model('cnn_model.h5')
 
-# Load the weights
-model.load_weights('cnn_weights.weights.h5')
-
 # Compile the model
 model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
+# Load the weights
+model.load_weights('cnn_weights.weights.h5')
 
 # Function to preprocess the image
 def preprocess_image(image):
@@ -48,7 +44,7 @@ st.markdown("- Tomato Healthy")
 st.markdown('''<style>[data-testid="stMarkdownContainer"] ul{list-style-position: inside;}</style>''', unsafe_allow_html=True)
 
 
-uploaded_file = st.file_uploader("Choose an image with single leaf...", type=["jpg", "jpeg", "png"])
+uploaded_file = st.file_uploader("Choose an image with single leaf", type=["jpg", "jpeg", "png"])
 
 if uploaded_file is not None:
     image = Image.open(uploaded_file)
