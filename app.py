@@ -8,11 +8,12 @@ import numpy as np
 # Load the model
 model = load_model('cnn_model.h5')
 
+# Load the weights
+model.load_weights('cnn_weights.weights.h5')
+
 # Compile the model
 model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
-# Load the weights
-model.load_weights('cnn_weights.weights.h5')
 
 # Function to preprocess the image
 def preprocess_image(image):
