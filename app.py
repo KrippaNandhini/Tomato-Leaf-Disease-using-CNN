@@ -1,18 +1,34 @@
 import streamlit as st
 import tensorflow as tf
-from tensorflow.keras.models import load_model
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Conv2D, MaxPooling2D, Flatten
 from PIL import Image
 import numpy as np
 
-# Load the model
-model = load_model('cnn_model1.h5')
+# Create the CNN model architecture
+def create_model():
+    model = Sequential([
+        Conv2D(32, (3, 3), activation='relu', input_shape=(200, 200, 3)),
+        MaxPooling2D((2, 2)),
+        Conv2D(64, (3, 3), activation='relu'),
+        MaxPooling2D((2, 2)),
+        Conv2D(128, (3, 3), activation='relu'),
+        MaxPooling2D((2, 2)),
+        Flatten(),
+        Dense(128, activation='relu'),
+        Dense(10, activation='softmax')  # Assuming there are 10 classes
+    ])
+    return model
 
-
+# Load the model architecture
+model = create_model()
 
 # Compile the model
 model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+
 # Load the weights
 model.load_weights('cnn1.weights.h5')
+
 # Function to preprocess the image
 def preprocess_image(image):
     img = image.resize((200, 200)) 
@@ -42,7 +58,6 @@ st.markdown("- Tomato Bacterial Spot")
 st.markdown("- Tomato Healthy")
 st.markdown('''<style>[data-testid="stMarkdownContainer"] ul{list-style-position: inside;}</style>''', unsafe_allow_html=True)
 
-
 uploaded_file = st.file_uploader("Choose an image with single leaf...", type=["jpg", "jpeg", "png"])
 
 if uploaded_file is not None:
@@ -57,7 +72,7 @@ if uploaded_file is not None:
         # Define your class dictionary
         class_dict = {'Tomato_Bacterial_spot': 0, 'Tomato_Early_blight': 1, 'Tomato_Late_blight': 2, 'Tomato_Leaf_Mold': 3, 'Tomato_Septoria_leaf_spot': 4, 'Tomato_Spider_mites': 5, 'Tomato_Target_Spot': 6, 'Tomato_Yellow_Leaf_Curl_Virus': 7, 'Tomato_mosaic_virus': 8, 'Tomato_healthy': 9}
 
-# Get the class name from the dictionary
+        # Get the class name from the dictionary
         # Find the index of the maximum value in the prediction array
         prediction_index = np.argmax(prediction)
         class_name = list(class_dict.keys())[list(class_dict.values()).index(prediction_index)]
