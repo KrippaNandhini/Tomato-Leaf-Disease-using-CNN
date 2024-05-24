@@ -24,7 +24,7 @@ model = Sequential([
 model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
 # Load the weights
-model.load_weights('my_cnn_weights.h5')
+model.load_weights('my_cnn_weights.weights.h5')
 
 # Evaluate the model with loaded weights (example)
 # loss, accuracy = model.evaluate(X_test, y_test)
