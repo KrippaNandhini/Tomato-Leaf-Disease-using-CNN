@@ -5,10 +5,10 @@ from PIL import Image
 import numpy as np
 
 # Load the model
-model = load_model('cnn_model.h5')
+model = load_model('cnn_model1.h5')
 
 # Load the weights
-model.load_weights('cnn.weights.h5')
+model.load_weights('cnn1.weights.h5')
 
 # Compile the model
 model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
