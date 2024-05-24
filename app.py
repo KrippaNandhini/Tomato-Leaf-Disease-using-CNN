@@ -11,7 +11,7 @@ import numpy as np
 model = load_model('my_cnn_model.h5')
 # Define the same architecture
 model = Sequential([
-    Conv2D(32, (3, 3), activation='relu', input_shape=(64, 64, 3)),
+    Conv2D(32, (3, 3), activation='relu', input_shape=(224,224, 3)),
     MaxPooling2D((2, 2)),
     Conv2D(64, (3, 3), activation='relu'),
     MaxPooling2D((2, 2)),
