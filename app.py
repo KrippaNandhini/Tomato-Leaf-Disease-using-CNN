@@ -72,12 +72,12 @@ import numpy as np
 dummy_x = np.random.random((10, 224, 224, 3))
 dummy_y = np.random.randint(10, size=(10,))
 
+# Load the weights
+model.load_weights('cnn_weights.weights.h5')
 # Perform evaluation
 model.evaluate(dummy_x, dummy_y)
 
 
-# Load the weights
-model.load_weights('cnn_weights.weights.h5')
 
 # Evaluate the model with loaded weights (example)
 # loss, accuracy = model.evaluate(X_test, y_test)
