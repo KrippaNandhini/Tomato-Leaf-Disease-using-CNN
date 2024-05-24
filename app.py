@@ -1,17 +1,83 @@
 
 import streamlit as st
 import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Conv2D, MaxPool2D, Flatten, Dense,BatchNormalization, Dropout
+from keras.initializers import RandomNormal
 from tensorflow.keras.models import load_model
 from PIL import Image
 import numpy as np
 
 # Load the model
 model = load_model('my_cnn_model.h5')
+# Define the same architecture
+model = Sequential()
+
+#convolution
+model.add(Conv2D(32, (3,3), input_shape = (200,200, 3), activation='relu', padding='same', kernel_initializer = RandomNormal(mean =0.0,stddev = 0.05,seed = None)))
+model.add(BatchNormalization())
+model.add(MaxPool2D(2,2))
+model.add(Dropout(0.2))
+
+model.add(Conv2D(64, (3,3), activation='relu', padding='same'))
+model.add(BatchNormalization())
+model.add(MaxPool2D(2,2))
+model.add(Dropout(0.2))
+
+model.add(Conv2D(128, (3,3), activation='relu', padding='same'))
+model.add(BatchNormalization())
+model.add(MaxPool2D(2,2))
+model.add(Dropout(0.2))
+
+model.add(Conv2D(192, (3,3), activation='relu', padding='same'))
+model.add(BatchNormalization())
+model.add(MaxPool2D(2,2))
+model.add(Dropout(0.2))
+
+model.add(Conv2D(256, (3,3), activation='relu', padding='same'))
+model.add(BatchNormalization())
+model.add(MaxPool2D(2,2))
+model.add(Dropout(0.2))
+
+model.add(Conv2D(300, (3,3), activation='relu', padding='same'))
+model.add(BatchNormalization())
+model.add(MaxPool2D(2,2))
+model.add(Dropout(0.2))
+
+model.add(Conv2D(369, (3,3), activation='relu', padding='same'))
+model.add(BatchNormalization())
+model.add(MaxPool2D(2,2))
+model.add(Dropout(0.2))
+
+#Dense
+model.add(Flatten())
+
+model.add(Dense(128, activation='relu'))
+model.add(Dropout(0.2))
+
+model.add(Dense(228, activation='relu'))
+model.add(Dropout(0.2))
+
+model.add(Dense(300, activation='relu'))
+model.add(Dropout(0.2))
+
+model.add(Dense(10, activation='softmax'))
+
+# Compile the model
+model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+
+# Load the weights
 model.load_weights('my_cnn_weights.weights.h5')
+
+# Evaluate the model with loaded weights (example)
+# loss, accuracy = model.evaluate(X_test, y_test)
+# print(f'Model accuracy with loaded weights: {accuracy}')
+
+#model.load_weights('my_cnn_weights.weights.h5')
 
 # Function to preprocess the image
 def preprocess_image(image):
-    img = image.resize((224, 224)) 
+    img = image.resize((200, 200)) 
     img_array = np.array(img)
     img_array = img_array / 255.0  # Normalize pixel values between 0 and 1
     img_array = np.expand_dims(img_array, axis=0)  # Add batch dimension
