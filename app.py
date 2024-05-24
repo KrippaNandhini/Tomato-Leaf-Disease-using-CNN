@@ -1,6 +1,8 @@
 
 import streamlit as st
 import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense
 from tensorflow.keras.models import load_model
 from PIL import Image
 import numpy as np
