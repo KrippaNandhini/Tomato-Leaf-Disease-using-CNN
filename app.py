@@ -1,14 +1,10 @@
 import streamlit as st
-import tensorflow as tf
 from tensorflow.keras.models import load_model
 from PIL import Image
 import numpy as np
 
 # Load the model
-model = load_model('cnn_model.h5')
-
-# Load the weights
-model.load_weights('cnn_weights.weights.h5')
+model = load_model('cnn_model.keras')
 
 # Compile the model
 model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
@@ -43,7 +39,6 @@ def main():
     st.markdown('''<style>[data-testid="stMarkdownContainer"] ul{list-style-position: inside;}</style>''', unsafe_allow_html=True)
     uploaded_file = st.file_uploader("Choose an image with a single leaf", type=["jpg", "jpeg", "png"])
 
-
     if uploaded_file is not None:
         image = Image.open(uploaded_file)
         if st.button('Classify'):
@@ -55,7 +50,7 @@ def main():
             st.subheader('Prediction:')
             class_dict = {'Tomato_Bacterial_spot': 0, 'Tomato_Early_blight': 1, 'Tomato_Late_blight': 2, 'Tomato_Leaf_Mold': 3, 'Tomato_Septoria_leaf_spot': 4, 'Tomato_Spider_mites': 5, 'Tomato_Target_Spot': 6, 'Tomato_Yellow_Leaf_Curl_Virus': 7, 'Tomato_mosaic_virus': 8, 'Tomato_healthy': 9}
             prediction_index = np.argmax(prediction)
-            class_name = list(class_dict.keys())[list(class_dict.values()).index(prediction_index+1)]
+            class_name = list(class_dict.keys())[list(class_dict.values()).index(prediction_index)]
             st.write(f"Predicted Class: {class_name}")
 
 if __name__ == "__main__":
