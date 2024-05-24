@@ -54,8 +54,8 @@ def main():
             # Displaying the predicted class or classes (depending on your output)
             st.subheader('Prediction:')
             class_dict = {'Tomato_Bacterial_spot': 0, 'Tomato_Early_blight': 1, 'Tomato_Late_blight': 2, 'Tomato_Leaf_Mold': 3, 'Tomato_Septoria_leaf_spot': 4, 'Tomato_Spider_mites': 5, 'Tomato_Target_Spot': 6, 'Tomato_Yellow_Leaf_Curl_Virus': 7, 'Tomato_mosaic_virus': 8, 'Tomato_healthy': 9}
-            prediction_index = np.argmax(prediction) +1
-            class_name = list(class_dict.keys())[list(class_dict.values()).index(prediction_index)]
+            prediction_index = np.argmax(prediction)
+            class_name = list(class_dict.keys())[list(class_dict.values()).index(prediction_index+1)]
             st.write(f"Predicted Class: {class_name}")
 
 if __name__ == "__main__":
