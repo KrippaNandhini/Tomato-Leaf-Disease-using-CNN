@@ -7,7 +7,28 @@ import numpy as np
 
 # Load the model
 model = load_model('my_cnn_model.h5')
-model.load_weights('my_cnn_weights.weights.h5')
+# Define the same architecture
+model = Sequential([
+    Conv2D(32, (3, 3), activation='relu', input_shape=(64, 64, 3)),
+    MaxPooling2D((2, 2)),
+    Conv2D(64, (3, 3), activation='relu'),
+    MaxPooling2D((2, 2)),
+    Flatten(),
+    Dense(64, activation='relu'),
+    Dense(10, activation='softmax')
+])
+
+# Compile the model
+model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+
+# Load the weights
+model.load_weights('my_cnn_weights.h5')
+
+# Evaluate the model with loaded weights (example)
+# loss, accuracy = model.evaluate(X_test, y_test)
+# print(f'Model accuracy with loaded weights: {accuracy}')
+
+#model.load_weights('my_cnn_weights.weights.h5')
 
 # Function to preprocess the image
 def preprocess_image(image):
