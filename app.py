@@ -13,8 +13,6 @@ model.load_weights('cnn.weights.h5')
 # Compile the model
 model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
-
-
 # Function to preprocess the image
 def preprocess_image(image):
     img = image.resize((200, 200)) 
