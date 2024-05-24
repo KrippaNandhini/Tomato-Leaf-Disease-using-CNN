@@ -66,6 +66,16 @@ model.add(Dense(10, activation='softmax'))
 # Compile the model
 model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
+import numpy as np
+
+# Create a dummy dataset (e.g., for a classification problem with 10 classes)
+dummy_x = np.random.random((10, 224, 224, 3))
+dummy_y = np.random.randint(10, size=(10,))
+
+# Perform evaluation
+model.evaluate(dummy_x, dummy_y)
+
+
 # Load the weights
 model.load_weights('cnn_weights.weights.h5')
 
