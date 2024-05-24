@@ -7,7 +7,7 @@ import numpy as np
 
 # Load the model
 model = load_model('cnn_model.h5')
-model.load_weights('cnn_model_weights.weights.h5')
+model.load_weights('cnn_weights.weights.h5')
 
 # Function to preprocess the image
 def preprocess_image(image):
